@@ -2,7 +2,7 @@
 
 Chenhao Xu
 
-[Link to this repository](https://www.example.com)
+[Link to this repository](https://github.com/chhaoxu/SI507---Final-Project)
 
 ---
 
