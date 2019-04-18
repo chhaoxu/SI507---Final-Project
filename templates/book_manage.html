@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图书管理系统 | by-陈彬</title>
+</head>
+<body>
+从此处添加书籍: <br>
+<br>
+<form method="post">
+    {{ form.csrf_token() }}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{form.type.label}}&nbsp;{{form.type}}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{form.book.label}}&nbsp;{{form.book}}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{form.comment.label}}&nbsp;{{form.comment}}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{form.submit}}<br>
+    <br>
+
+    {% for message in get_flashed_messages() %}
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{message}}
+    {%endfor%}
+</form>
+<br>
+<hr>
+<h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;书籍目录</h1>
+
+    <ul>
+        <ul>
+            {% for type in all_types %}
+                <li>{{type.name}}&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;<a href="{{url_for("delete_type",type_id=type.id)}}">Delete</a></li>
+                <ul>
+                    {% for book in type.books %}
+                        <li>{{book.name}}&nbsp;&nbsp;&nbsp;<a href="{{url_for("delete_book",book_id=book.id)}}">Delete</a></li>
+                        {% for comment in book.comments %}
+                        <li>{{comment.content}}&nbsp;&nbsp;&nbsp;<a href="{{url_for("delete_comment",comment_id=comment.id)}}">Delete</a></li>
+{% endfor %}
+
+                    {% else %}
+                        <li>Nothing</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </ul>
+    </ul>
+
+</body>
+</html>
