@@ -29,7 +29,6 @@ My project is to develop a book management system that can help people to manage
 
 
 ## Routes in this application
--
 - `/` -> this is the home page that you can add books.
 - `/bookRecommendation` -> this route shows books recommendation to users.
 - `/myBook` -> this route is your book repository.
