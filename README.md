@@ -8,7 +8,7 @@ Chenhao Xu
 
 ## Project Description
 
-My project is to develop a book management system that can help people to manage the books thev've read and make some comments on every book they've read. It can realize many functions related to book management such as adding and deleting books and comments and books' types。 And it also can show the recommendation books to the users as well.
+My project is to develop a book management system that can help people to manage the books thev've read and make some comments on every book they've read. It can realize many functions related to book management such as adding and deleting books and comments and books' types. And it also can show the recommendation books to the users as well.
 
 ## How to run
 
