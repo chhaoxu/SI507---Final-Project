@@ -1,17 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>图书管理系统 | by-陈彬</title>
-</head>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Book Management System</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+
+  </head>
+
 <body>
-从此处添加书籍: <br>
-<br>
+  <div class="panel-body" style="height: 600px; overflow:scroll">
+        <div style="border: 1px  #000000; width: 90%; margin: 0 auto;">
+<span>
+<br><br><br><h2>Add book from there:</h2>
+
+
 <form method="post">
     {{ form.csrf_token() }}
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{form.type.label}}&nbsp;{{form.type}}<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{form.book.label}}&nbsp;{{form.book}}<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{form.comment.label}}&nbsp;{{form.comment}}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{form.comment.label}}&nbsp;<textarea input id="comment" name="comment" required type="text" value="" cols="30" rows="3"></textarea><br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{form.submit}}<br>
     <br>
 
@@ -20,27 +34,21 @@
     {%endfor%}
 </form>
 <br>
+<br>
+<a href="/bookRecommendation">Click To View Book Recommendation</a>
+<br>
+<a href="/myBook">Click To View My Book Repository</a>
+
+</div>
+   </div>
 <hr>
-<h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;书籍目录</h1>
 
-    <ul>
-        <ul>
-            {% for type in all_types %}
-                <li>{{type.name}}&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;<a href="{{url_for("delete_type",type_id=type.id)}}">Delete</a></li>
-                <ul>
-                    {% for book in type.books %}
-                        <li>{{book.name}}&nbsp;&nbsp;&nbsp;<a href="{{url_for("delete_book",book_id=book.id)}}">Delete</a></li>
-                        {% for comment in book.comments %}
-                        <li>{{comment.content}}&nbsp;&nbsp;&nbsp;<a href="{{url_for("delete_comment",comment_id=comment.id)}}">Delete</a></li>
-{% endfor %}
 
-                    {% else %}
-                        <li>Nothing</li>
-                    {% endfor %}
-                </ul>
-            {% endfor %}
-        </ul>
-    </ul>
 
-</body>
-</html>
+
+     <script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+     <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+     <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+
+   </body>
+ </html>

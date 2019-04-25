@@ -6,7 +6,7 @@ class FinalProjectSQLiteDBTests(unittest.TestCase):
 
     def setUp(self):
         self.conn = sqlite3.connect(
-            "sample_books.sqlite")
+            "sample_books.db")
         self.cur = self.conn.cursor()
 
     def test_for_countries_table(self):
@@ -29,15 +29,23 @@ class FinalProjectSQLiteDBTests(unittest.TestCase):
         self.assertEqual(data, ('Pets',),
                          "Testing data that results from selecting types.id=1")
 
-    def test_for_users_table(self):
-        self.cur.execute(
-            "select username, password from users where id =1")
-        data = self.cur.fetchone()
-        self.assertEqual(data, ('chhaoxu', '12345678'),
-                         "Testing data that results from selecting users.id=1")
+
 
     def test_book_insert_works(self):
-        book = ('The Mister', 'The passionate new romance from E L James, author of the phenomenal #1 bestselling Fifty Shades Trilogy', 8.8)
+        type = ("Cooking",)
+        self.cur.execute(
+            "insert into types(name) values (?)", type)
+        self.conn.commit()
+
+        self.cur.execute(
+            "select name from types where name = 'Cooking'")
+        data = self.cur.fetchone()
+        self.assertEqual(data, type, "Testing a select statement where typeName = Cooking")
+
+    def test_type_insert_works(self):
+        book = ('The Mister',
+                'The passionate new romance from E L James, author of the phenomenal #1 bestselling Fifty Shades Trilogy',
+                8.8)
         self.cur.execute(
             "insert into books(name, description, rating) values (?, ?, ?)", book)
         self.conn.commit()
@@ -46,18 +54,6 @@ class FinalProjectSQLiteDBTests(unittest.TestCase):
             "select name, description, rating from books where name = 'The Mister'")
         data = self.cur.fetchone()
         self.assertEqual(data, book, "Testing a select statement where bookName = The Mister")
-
-
-    def test_users_insert_works(self):
-        user = ('Mister', '123456678')
-        self.cur.execute(
-            "insert into users(username, password) values (?, ?)", user)
-        self.conn.commit()
-
-        self.cur.execute(
-            "select username, password from users where username = 'Mister'")
-        data = self.cur.fetchone()
-        self.assertEqual(data, user, "Testing a select statement where userName = Mister")
 
     def test_foreign_key_book(self):
         res = self.cur.execute(

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>Books Recommendation</title>
+</head>
+<body>
+<h1 align="center">Books Recommendation</h1>
+<h4 align="center", style="color:#FF0000";>The books listed below are all spidered from https://thegreatestbooks.org</h1>
+<a href="/">Back To Add Book</a>
+{% for data1 in book_list %}
+  <h4>
+  <h3>{{ loop.index }}. </h3><a class="st">{{ book_list[loop.index0] }}</a>&nbsp; by &nbsp;
+  <a>{{ name_list[loop.index0] }}</a>
+    </h4>
+    <hr>
+    {% endfor %}
+<style>
+        .st {
+            font-weight: bold;
+          color: blue;
+        }
+    </style>
+
+</body>
+</html>
