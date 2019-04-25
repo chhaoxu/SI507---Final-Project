@@ -50,7 +50,7 @@ My project is to develop a book management system that can help people to manage
   - book_manage.html
   - fail.html
 - projectSource
-  - database_diagram.png
+  - databaseDiagram.png
   - bookRecommendation.png
   - bookAdd.png
   - bookList.png
