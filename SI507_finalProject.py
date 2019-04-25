@@ -15,60 +15,6 @@ from wtforms import widgets
 import requests
 from lxml import etree
 
-'''app = Flask(__name__)
-app.debug = True
-app.use_reloader = True
-app.config['SECRET_KEY'] = 'hard to guess string for app security adgsdfsadfdflsdfsj'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./sample_books.db'
-app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
-session = db.session
-
-
-book_type=db.Table('book_type',
-    db.Column('book_id',db.Integer(),db.ForeignKey('books.id')),
-    db.Column('type_id',db.Integer(),db.ForeignKey('types.id')))
-
-class User(db.Model):
-    __tablename__ = 'users'
-    username = Column(String(32), index=True, nullable=False)
-    id = db.Column(Integer, primary_key=True)
-
-    password = db.Column(db.String(32), doc='password', nullable=False)
-    comments = db.relationship('Comment', backref='users', cascade='all', lazy='dynamic')
-
-
-class Book(db.Model):
-    __tablename__ = 'books'
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64))
-    description = db.Column(db.Text, doc='book description', default='no description!', nullable=True)
-    rating = db.Column(db.Float, doc='book rating', default=0)
-    comments = db.relationship('Comment', backref='Book')
-
-    types = db.relationship('Type', secondary=book_type, backref=db.backref('book',lazy='dynamic'),lazy='dynamic')
-    type_id = db.Column(db.Integer, db.ForeignKey("types.id"))
-
-class Comment(db.Model):
-
-    __tablename__ = 'comments'
-
-    id = db.Column(db.Integer, primary_key=True)
-    bookId = db.Column(db.Integer, db.ForeignKey('books.id'), nullable=False)
-    content = db.Column(db.Text, nullable=False, doc='content')
-    rating = db.Column(db.SmallInteger, nullable=True)
-    username = db.Column(db.String(32), db.ForeignKey('users.id'))
-class Type(db.Model):
-    __tablename__= "types"
-    id = db.Column(db.Integer(),primary_key=True)
-    name = db.Column(db.String(64))
-    books = db.relationship('Book', backref='Type')
-    def __repr__(self):
-        return self.name
-'''
 class TrueForm(FlaskForm):
     type = StringField("Type",validators=[DataRequired()])
     book = StringField("Book",validators=[DataRequired()])
@@ -86,6 +32,22 @@ def make_type():
     db.session.add(comment1)
     db.session.commit()
 
+    
+def spider():
+
+
+    html = etree.HTML(requests.get("https://thegreatestbooks.org/").content)
+    book_name = html.xpath('//div[@class="col"]/h4/a[1]/text()')
+    name = html.xpath('//div[@class="col"]/h4/a[2]/text()')
+    return book_name, name
+
+
+book_list, name_list = spider()
+
+
+@app.route('/bookRecommendation')
+def hello_world():
+    return render_template('bookRecommendation.html', book_list=book_list, name_list=name_list)
 
 @app.route("/",methods=["GET","POST"])
 def add_book():
@@ -133,24 +95,6 @@ def add_book():
             flash("ERROR!")
     all_types = Type.query.all()
     return render_template("book_manage.html", all_types=all_types, form=true_form)
-
-
-
-def spider():
-
-
-    html = etree.HTML(requests.get("https://thegreatestbooks.org/").content)
-    book_name = html.xpath('//div[@class="col"]/h4/a[1]/text()')
-    name = html.xpath('//div[@class="col"]/h4/a[2]/text()')
-    return book_name, name
-
-
-book_list, name_list = spider()
-
-
-@app.route('/bookRecommendation')
-def hello_world():
-    return render_template('bookRecommendation.html', book_list=book_list, name_list=name_list)
 
 
 @app.route("/myBook",methods=["GET","POST"])
