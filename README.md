@@ -12,7 +12,7 @@ My project is to develop a book management system that can help people to manage
 
 ## How to run
 
-1. First, you should install all requirements with `pip install -r requirement.txt`.
+1. First, you should open your terminal and create virtual environment, and you should type `virtualenv ENV` and then type `source ENV/bin/activate` to activate your virtual environment and then you need to install all requirements with `pip install -r requirement.txt`.
 2. Second, you should run `python SI507_finalProject.py runserver`.
 3. Open your browser and type the url displayed on your terminal.
 4. Then you can see the links on the website and go to every other page.
