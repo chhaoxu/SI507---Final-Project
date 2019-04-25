@@ -107,5 +107,5 @@ Below is a list of the requirements listed in the rubric for you to copy and pas
 
 
 ### (PART 2)Database diagram
-![image](https://github.com/chhaoxu/SI507---Final-Project/raw/master/projectSource/database_diagram.png)
+![image](https://github.com/chhaoxu/SI507---Final-Project/raw/master/projectSource/databaseDiagram.png)
 <h3>(The database is put in the projectSource directory.)</h3>
