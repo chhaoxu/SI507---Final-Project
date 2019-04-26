@@ -38,9 +38,10 @@ My project is to develop a book management system that can help people to manage
 
 ## How to run tests
 1. First we neet to open our terminal and cd into the main dictionary.
-2. Second we need to pip install -r requirements.txt.
+2. Second we need to pip install -r requirements.txt if we've not done it.
 3. Then we need to run `python SI507_finalProject.py runserver` and then run `control + C` to exit the server.
 4. Finally we need to run `python SI507project_tests.py` to run our test file and now we can see the test result in our terminal.
+![image](https://github.com/chhaoxu/SI507---Final-Project/raw/master/projectSource/test.png)
 
 ## In this repository:
 - templates
